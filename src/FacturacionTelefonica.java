@@ -15,16 +15,15 @@ public class FacturacionTelefonica {
             cantidadLineas = sc.nextInt();
         }
 
-        double[][] datosLineas = getUserData(cantidadLineas);
+        double[][] datosLineas = getUserData(cantidadLineas, sc);
 
         processBills(datosLineas);
 
         sc.close();
     }
 
-    public static double[][] getUserData(int cantidadLineas) {
-
-        Scanner sc2 = new Scanner(System.in);
+    public static double[][] getUserData(int cantidadLineas, Scanner sc) {
+        
         double[][] lineas = new double[cantidadLineas][2];
 
         for (int i = 0; i < cantidadLineas; i++) {
@@ -34,7 +33,7 @@ public class FacturacionTelefonica {
             double base;
             do {
                 System.out.print("Costo base del plan: ");
-                base = sc2.nextDouble();
+                base = sc.nextDouble();
                 if (base < 0) {
                     System.out.println("El valor no puede ser negativo.");
                 }
@@ -43,17 +42,16 @@ public class FacturacionTelefonica {
             double minutos;
             do {
                 System.out.print("Minutos excedidos: ");
-                minutos = sc2.nextDouble();
+                minutos = sc.nextDouble();
                 if (minutos < 0) {
                     System.out.println("El valor no puede ser negativo.");
                 }
             } while (minutos < 0);
-
+//
             lineas[i][0] = base;
             lineas[i][1] = minutos;
         }
 
-        sc2.close();
         return lineas;
     }
 
@@ -79,6 +77,7 @@ public class FacturacionTelefonica {
     public static void processBills(double[][] lineas) {
 
         double totalGeneral = 0;
+        //
         int index = 1;
 
         for (double[] linea : lineas) {
